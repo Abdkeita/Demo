@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
- * Created by abd on 9/14/2017.
+ * Created by buchi on 9/13/2017.
  */
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
@@ -29,7 +29,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         this.items = itemArrayList;
     }
 
-
     @Override
     public ItemAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_user, viewGroup, false);
@@ -39,13 +38,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ItemAdapter.ViewHolder viewHolder, int i) {
         viewHolder.title.setText(items.get(i).getLogin());
-        viewHolder.githublink1.setText(items.get(i).getHtmlurl());
-
+        viewHolder.githublink1.setText(items.get(i).getHtmlUrl());
 
         Picasso.with(context)
-                .load(items.get(i).getAvatarurl())
-                .placeholder(R.drawable.loader)
-                .into(viewHolder.avatarView);
+                .load(items.get(i).getAvatarUrl())
+                .placeholder(R.drawable.load)
+                .into(viewHolder.imageView);
     }
 
     @Override
@@ -55,30 +53,32 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView title, githublink1;
-        private ImageView avatarView;
+        private ImageView imageView;
+
 
         public ViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
-            githublink1 = (TextView) view.findViewById(R.id.github_link);
-            avatarView = (ImageView) view.findViewById(R.id.avatar);
+            githublink1 = (TextView) view.findViewById(R.id.githublink1);
+            imageView = (ImageView) view.findViewById(R.id.cover);
 
-            // on item click
+            //on item click
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
-                        Item ClickedDataItem = items.get(pos);
+                        Item clickedDataItem = items.get(pos);
                         Intent intent = new Intent(context, DetailActivity.class);
                         intent.putExtra("login", items.get(pos).getLogin());
-                        intent.putExtra("htmlurl", items.get(pos).getHtmlurl());
-                        intent.putExtra("avatarurl", items.get(pos).getAvatarurl());
+                        intent.putExtra("html_url", items.get(pos).getHtmlUrl());
+                        intent.putExtra("avatar_url", items.get(pos).getAvatarUrl());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
-                        Toast.makeText(v.getContext(), "you clicked" + ClickedDataItem.getLogin(), Toast.LENGTH_SHORT);
+                        Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getLogin(), Toast.LENGTH_SHORT).show();
                     }
                 }
+
             });
         }
     }

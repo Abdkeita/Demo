@@ -4,56 +4,59 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by abd on 9/14/2017.
+ * Created by buchi on 9/13/2017.
  */
-// Object for the Username, Profile photo url, link to the profile.
+
 public class Item {
+
     @SerializedName("login")
     @Expose
     private String login;
-
-    @SerializedName("Avatar")
+    @SerializedName("avatar_url")
     @Expose
-    private String Avatarurl;
-
+    private String avatarUrl;
     @SerializedName("html_url")
     @Expose
-    private String htmlurl;
+    private String htmlUrl;
 
-    public Item(String login, String avatarurl, String htmlurl) {
+    public Item(String login, String avatarUrl, String htmlUrl) {
         this.login = login;
-        this.Avatarurl = avatarurl;
-        this.htmlurl = htmlurl;
+        this.avatarUrl = avatarUrl;
+        this.htmlUrl = htmlUrl;
+
     }
 
-    // this is the get method for login
     public String getLogin() {
+
         return login;
+
     }
 
-    // Here we Get the method for login
-    public void setlogin(String login) {
+    public void setLogin(String login) {
+
         this.login = login;
     }
 
-    // this is the get method for Image
-    public String getAvatarurl() {
-        return Avatarurl;
+    public String getAvatarUrl() {
+
+        return avatarUrl;
     }
 
-    // Here we set the method for Image
-    public void setAvatarurl(String avatarurl) {
-        this.Avatarurl = avatarurl;
+    public void setAvatarUrl(String avatarUrl) {
+
+        this.avatarUrl = avatarUrl;
     }
 
-    // Here we Get the method for githubLink
-    public String getHtmlurl() {
-        return htmlurl;
+    public String getHtmlUrl() {
+
+        return htmlUrl;
     }
 
-    // Here we set the method for githubLink
-    public void setHtmlurl(String htmlurl) {
-        this.htmlurl = htmlurl;
-    }
 
+    public void setHtmlUrl(String htmlUrl) {
+
+        this.htmlUrl = htmlUrl;
+
+
+    }
 }

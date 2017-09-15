@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud_color">
+
 
     <ImageView
         android:id="@+id/user_image_header"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="310dp"
         android:fitsSystemWindows="true"
         android:scaleType="fitXY" />
 
     <TextView
-        android:id="@+id/heaer"
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/user_image_header"
@@ -26,19 +28,20 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/heaer"
+        android:layout_below="@+id/header"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="3dp"
-        android:textSize="20sp" />
+        android:textColor="#fff"
+        android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/github_link"
+        android:id="@+id/githublink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/username"
+        android:layout_margin="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Github profile Link"
+        android:text="Github Profile Link"
         android:textAlignment="center"
         android:textSize="25dp"
         android:textStyle="bold" />
@@ -47,8 +50,10 @@
         android:id="@+id/link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/github_link"
+        android:layout_below="@+id/githublink"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="3dp"
-        android:textSize="20sp" />
+        android:textColor="#fff"
+        android:textSize="20dp" />
+
 </RelativeLayout>

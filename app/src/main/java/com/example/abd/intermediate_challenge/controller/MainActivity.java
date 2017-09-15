@@ -25,36 +25,38 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
     TextView Disconnected;
     ProgressDialog pd;
     private RecyclerView recyclerView;
-    private Item Item;
-    private SwipeRefreshLayout swipecontainer;
+    private Item item;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        InitViews();
 
-        swipecontainer = (SwipeRefreshLayout) findViewById(R.id.swipecontainer); // we get the swipe container using the FindViewById from the
+        initViews();
 
-        swipecontainer.setColorSchemeResources(android.R.color.holo_green_light);
-        swipecontainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
+        swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 loadJSON();
-                Toast.makeText(MainActivity.this, "Github users Refreshed", Toast.LENGTH_SHORT).show(); // this pops up when the Item is updated successfully.
+                Toast.makeText(MainActivity.this, "Github Users Refreshed", Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 
-    private void InitViews() { // Method for the progressDialog that will first appear on lauching the application.
+    private void initViews() {
         pd = new ProgressDialog(this);
-        pd.setMessage("Retrieving data from Github"); // Message it will display while the progress is On.
-        pd.setCancelable(false); // setting this to false disable users from cancelling the process
-        pd.show(); // this will display this Initview method
+        pd.setMessage("Fetching Users From Github");
+        pd.setCancelable(false);
+        pd.show();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.smoothScrollToPosition(0);
@@ -65,27 +67,29 @@ public class MainActivity extends AppCompatActivity {
         Disconnected = (TextView) findViewById(R.id.disconnected);
         try {
             Client Client = new Client();
-            Service apiservice =
+            Service apiService =
                     com.example.abd.intermediate_challenge.api.Client.getClient().create(Service.class);
-            Call<ItemResponse> call = apiservice.getItem();
+            Call<ItemResponse> call = apiService.getItems();
             call.enqueue(new Callback<ItemResponse>() {
                 @Override
                 public void onResponse(Call<ItemResponse> call, Response<ItemResponse> response) {
                     List<Item> items = response.body().getItems();
                     recyclerView.setAdapter(new ItemAdapter(getApplicationContext(), items));
                     recyclerView.smoothScrollToPosition(0);
-                    swipecontainer.setRefreshing(false);
+                    swipeContainer.setRefreshing(false);
                     pd.hide();
                 }
 
                 @Override
-                public void onFailure(Call call, Throwable t) {
-                    Log.d("Error Encountered", t.getMessage());
-                    Toast.makeText(MainActivity.this, "Error Fetching Data", Toast.LENGTH_SHORT).show();
+                public void onFailure(Call<ItemResponse> call, Throwable t) {
+                    Log.d("Error", t.getMessage());
+                    Toast.makeText(MainActivity.this, "Error Fetching Data!", Toast.LENGTH_SHORT).show();
                     Disconnected.setVisibility(View.VISIBLE);
                     pd.hide();
+
                 }
             });
+
         } catch (Exception e) {
             Log.d("Error", e.getMessage());
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();

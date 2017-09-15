@@ -12,6 +12,6 @@ import retrofit2.http.GET;
 // End-point of the application
 public interface Service {
     @GET("/search/users?q=language:java+location:lagos")
-        // It will call for the user detail from the following URL given.
-    Call<ItemResponse> getItem(); // Gets the Items for the search made by the @GET method
+    Call<ItemResponse> getItems();
+
 }

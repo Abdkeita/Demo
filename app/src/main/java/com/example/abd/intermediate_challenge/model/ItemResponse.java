@@ -6,10 +6,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by abd on 9/14/2017.
+ * Created by buchi on 9/13/2017.
  */
-// Item here is know to be Array
+
 public class ItemResponse {
+
     @SerializedName("items")
     @Expose
     private List<Item> items;
@@ -21,5 +22,5 @@ public class ItemResponse {
     public void setItems(List<Item> items) {
         this.items = items;
     }
-
 }
+
