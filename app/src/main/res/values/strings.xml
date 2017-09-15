@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Intermediate_Challenge</string>
+    <string name="internet">No internet connection, Please make sure your are connected to a network</string>
+</resources>
